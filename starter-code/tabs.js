@@ -12,10 +12,12 @@ function changeTabFocus(e) {
   const keydownLeft = 37;
   const keydownRight = 39;
 
+  // change the tabindex of the current tab to -1
   if (e.keyCode === keydownLeft || e.keyCode === keydownRight) {
     tabs[tabFocus].setAttribute("tabindex", -1);
   }
 
+  // if the right key is pushed, move to the next tab on the right, else tab left
   if (e.keyCode === keydownRight) {
     tabFocus++;
     if (tabFocus >= tabs.length) {
@@ -42,6 +44,7 @@ function changeTabPanel(e) {
   const tabContainer = targetTab.parentNode;
   const mainContainer = tabContainer.parentNode;
 
+  //marks the active article-tab
   tabContainer
     .querySelector('[aria-selected="true"]')
     .setAttribute("aria-selected", false);

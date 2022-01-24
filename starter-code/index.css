@@ -157,6 +157,7 @@ select {
   max-width: 80rem;
 }
 
+/* Screen-reader-only */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -311,6 +312,35 @@ select {
   transform: scale(1.5);
 }
 
+.small-button {
+  font-size: 1.3rem;
+  position: relative;
+  z-index: 1;
+  display: inline-grid;
+  place-items: center;
+  padding: 0 2em;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  text-decoration: none;
+}
+
+.small-button::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: hsl(var(--clr-white) / 0.1);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 500ms linear, transform 750ms ease-in-out;
+}
+
+.small-button:hover::after,
+.small-button:focus::after {
+  opacity: 1;
+  transform: scale(1.5);
+}
 /* primary-header */
 
 .logo {
@@ -330,6 +360,14 @@ select {
   margin: 0;
   background: hsl(var(--clr-white) / 0.05);
   backdrop-filter: blur(1.5rem);
+}
+
+/* Only if browser supports the backdrop-filter */
+@supports (backdrop-filter: blur(1rem)) {
+  .primary-navigation {
+    background: hsl(var(--clr-white) / 0.05);
+    backdrop-filter: blur(1.5rem);
+  }
 }
 
 .primary-navigation a {
@@ -398,6 +436,10 @@ select {
   }
 }
 
+.primary-navigation--technology {
+  padding: 0 5rem 0 3rem;
+}
+
 @media (min-width: 35em) and (max-width: 44.999em) {
   .primary-navigation a > span {
     display: none;
@@ -417,6 +459,7 @@ select {
   }
 
   nav {
+    /* positions the nav after the line */
     order: 2;
   }
 
@@ -523,6 +566,24 @@ body {
 @media (min-width: 45rem) {
   .crew {
     background-image: url(./assets/crew/background-crew-desktop.jpg);
+  }
+}
+
+/* technology */
+.technology {
+  background-image: url(./assets/technology/background-technology-mobile.jpg);
+}
+
+@media (min-width: 35rem) {
+  .technology {
+    background-position: center center;
+    background-image: url(./assets/technology/background-technology-tablet.jpg);
+  }
+}
+
+@media (min-width: 45rem) {
+  .technology {
+    background-image: url(./assets/technology/background-technology-desktop.jpg);
   }
 }
 
@@ -686,8 +747,100 @@ body {
   }
 
   .grid-container--crew > picture {
+    /* allows to break out the right side, so the pics are bigger and similar */
     grid-column: span 2;
     align-self: end;
     max-width: 90%;
+  }
+}
+
+/* technology layout */
+.grid-container--technology {
+  --flow-space: 2rem;
+  padding: 0;
+  grid-template-areas:
+    "title"
+    "image"
+    "tabs"
+    "content";
+}
+
+.grid-container--technology > picture {
+  grid-area: image;
+  max-width: 100%;
+  border-bottom: 1px solid hsl(var(--clr-white) / 0.1);
+}
+
+.grid-container--technology > .number-indicators {
+  grid-area: tabs;
+}
+
+.technology-details {
+  padding: 0 1rem;
+}
+
+.grid-container--technology > .technology-details {
+  grid-area: content;
+}
+
+.technology-details h2 {
+  color: hsl(var(--clr-white) / 0.5);
+}
+
+@media (min-width: 35em) {
+  .numbered-title {
+    justify-self: start;
+    margin-top: 2rem;
+  }
+
+  .destination-meta {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: space-evenly;
+    -ms-flex-pack: space-evenly;
+    justify-content: space-evenly;
+  }
+
+  .grid-container--technology {
+    padding-bottom: 0;
+    grid-template-areas: "title" "content" "tabs" "image";
+  }
+}
+
+@media (min-width: 45em) {
+  .grid-container {
+    text-align: left;
+    -webkit-column-gap: var(--container-gap, 3rem);
+    -moz-column-gap: var(--container-gap, 3rem);
+    column-gap: var(--container-gap, 3rem);
+    grid-template-columns: minmax(1rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(
+        1rem,
+        1fr
+      );
+  }
+
+  .grid-container--technology {
+    padding: 0 clamp(1.5rem, 5vw, 3.5rem);
+    grid-template-columns: minmax(5rem, 1fr) minmax(0, 37rem) minmax(0, 23rem) minmax(
+        1rem,
+        1fr
+      );
+    justify-items: start;
+    grid-template-areas: ". title title ." "tabs content image image" ". . . .";
+  }
+
+  .grid-container--technology > .number-indicators {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    justify-self: center;
+  }
+
+  .grid-container--technology > picture {
+    grid-column: 3/-1;
+    max-width: 100%;
   }
 }

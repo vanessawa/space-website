@@ -35,6 +35,8 @@
       </div>
       <button class="mobile-nav-toggle" aria-controls="primary-navigation">
         <span class="sr-only" aria-expanded="false">Menu</span>
+        <!-- sr-only-class by css hides the text visibly, but will be read by screen-reader 
+        aria-expanded toggles the visibility of the object-->
       </button>
       <nav>
         <ul
@@ -48,6 +50,7 @@
               href="index.html"
               ><span aria-hidden="true">00</span>Home</a
             >
+            <!-- aria-hidden hides the visible text from the screen-reader -->
           </li>
           <li>
             <a
