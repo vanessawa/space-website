@@ -1,9 +1,9 @@
 # Space Website
 
-![](.screenshot-home.png)
-![](.screenshot-destination.png)
-![](.screenshot-crew.png)
-![](.screenshot-technology.png)
+![](./screenshot-home.png)
+![](./screenshot-destination.png)
+![](./screenshot-crew.png)
+![](./screenshot-technology.png)
 
 ## The Mission
 
